@@ -123,8 +123,7 @@ rf.tuned.model=randomForest(y~.,data=b_train,
 train.score=predict(rf.tuned.model,newdata = b_train,type='prob')[,2]
 pROC::roc(b_train$y,train.score)
 
-max(KS)
-
+#variable importance plot
 importance(rf.tuned.model)
 varImpPlot(rf.tuned.model)
 ##testof train data
@@ -178,21 +177,9 @@ table(test.predicted)
 test.predicted[test.predicted==0]="no"
 test.predicted[test.predicted==1]="yes"
 write.csv(test.predicted,"proj5.csv",row.names = F)
-####quiz#
-
-round(mean(b_train$age),2)
-quantile(b_train$balance)
-x=72-1.5*(1414-72)
-y=1414+1.5*(1414-72)
-
-sum(b_train$balance<x) +sum(b_train$balance>y)
-sum(b_train$balance>x | b_train$balance<y)
-var(b_train$balance)
-sum(b_train1$y==0)/nrow(b_train1)
-sum(train1.score==0)
 
 
-###logisticreg
+###Applying Logisticreg
 glimpse(b_train)
 sum(b_train$pdays== -1)/nrow(b_train)
 fit = lm(y~.-job_blue_collar-month_may,data=b_train1)
